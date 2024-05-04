@@ -46,7 +46,7 @@ where
     T: fmt::Display,
 {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        unimplemented!()
+        unimplemented!("hogehoge")
         //     let mut current = self.head.clone();
         //     while let Some(node) = current {
         //         let n = node.borrow();
