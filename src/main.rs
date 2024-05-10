@@ -1,15 +1,16 @@
 use std::fmt;
 
-struct Node<T> {
+#[derive(Clone)]
+struct Node<T: Clone> {
     hoge: T,
 }
 
-struct DoublyLinkedList<T> {
+struct DoublyLinkedList<T: Clone> {
     head: Option<Node<T>>,
     tail: Option<Node<T>>,
 }
 
-impl<T> DoublyLinkedList<T> {
+impl<T: Clone> DoublyLinkedList<T> {
     fn new() -> Self {
         DoublyLinkedList {
             head: None,
@@ -41,29 +42,30 @@ impl<T> DoublyLinkedList<T> {
     }
 }
 
-impl<T> fmt::Display for DoublyLinkedList<T>
+impl<T: Clone> fmt::Display for DoublyLinkedList<T>
 where
-    T: fmt::Display,
+    T: fmt::Display, //listの表示のされ方を定義できる
 {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        unimplemented!("hogehoge")
-        //     let mut current = self.head.clone();
-        //     while let Some(node) = current {
-        //         let n = node.borrow();
-        //         write!(f, "{}", n.data)?;
-        //         current = n.next.clone();
-        //         if current.is_some() {
-        //             write!(f, "<--->")?;
-        //         }
-        //     }
-        //     Ok(())
+        let mut current = self.head.clone();
+        write!(f, "(");
+        //  while let Some(node) = current {
+        //      let n = node.borrow();
+        //      write!(f, "{}", n.data)?;
+        //      current = n.next.clone();
+        //      if current.is_some() {
+        //          write!(f, "<--->")?;
+        //      }
+        //  }
+        write!(f, ")");
+        Ok(())
     }
 }
 
 fn main() {
     let mut list: DoublyLinkedList<i32> = DoublyLinkedList::new();
 
-    println!("{}", list);
+    println!("{}", list); //{}により、Displayの仕様が呼ばれる
 
     list.push_back(1);
     list.push_back(2);
